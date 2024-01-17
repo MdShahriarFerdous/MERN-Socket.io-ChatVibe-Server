@@ -1,5 +1,5 @@
 const app = require("./app");
-const { ServerPort, localClientPort } = require("./secrets");
+const { ServerPort, localClientPort, deployClientPort } = require("./secrets");
 const databaseConnection = require("./src/config/db");
 
 const server = app.listen(ServerPort || 8000, () => {
@@ -11,7 +11,7 @@ const server = app.listen(ServerPort || 8000, () => {
 const io = require("socket.io")(server, {
 	pingTimeout: 60000,
 	cors: {
-		origin: [localClientPort],
+		origin: [localClientPort, deployClientPort],
 	},
 });
 
